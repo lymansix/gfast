@@ -22,7 +22,7 @@ import (
 func init() {
 	var adp UploadAdapter
 	if upType == "local" {
-		//使用本地上传
+		// 使用本地上传
 		upPath := g.Cfg().GetString("upload.local.UpPath")
 		adp = UploadLocalAdapter{
 			UpPath:     "/pub_upload/",
@@ -59,7 +59,7 @@ func (up UploadLocalAdapter) UpFiles(files []*ghttp.UploadFile) (fileInfos []*Fi
 	return up.upBathByType(files, "file")
 }
 
-//文件上传 img|file
+// 文件上传 img|file
 func (up UploadLocalAdapter) upByType(file *ghttp.UploadFile, fType string) (fileInfo *FileInfo, err error) {
 	if file == nil {
 		err = gerror.New("未上传任何文件")
@@ -76,19 +76,19 @@ func (up UploadLocalAdapter) upByType(file *ghttp.UploadFile, fType string) (fil
 		typeKey = "sys.uploadFile.fileType"
 		sizeKey = "sys.uploadFile.fileSize"
 	}
-	//获取上传类型配置
+	// 获取上传类型配置
 	config, err := up.getUpConfig(typeKey)
 	if err != nil {
 		return
 	}
 
-	//检测文件类型
+	// 检测文件类型
 	rightType := up.checkFileType(file.Filename, config.ConfigValue)
 	if !rightType {
 		err = gerror.New("上传文件类型错误，只能包含后缀为：" + config.ConfigValue + "的文件。")
 		return
 	}
-	//获取上传大小配置
+	// 获取上传大小配置
 	config, err = up.getUpConfig(sizeKey)
 	if err != nil {
 		return
@@ -115,7 +115,7 @@ func (up UploadLocalAdapter) upByType(file *ghttp.UploadFile, fType string) (fil
 	return
 }
 
-//批量上传 img|file
+// 批量上传 img|file
 func (up UploadLocalAdapter) upBathByType(files []*ghttp.UploadFile, fType string) (fileInfos []*FileInfo, err error) {
 	if len(files) == 0 {
 		err = gerror.New("未上传任何文件")
@@ -132,18 +132,18 @@ func (up UploadLocalAdapter) upBathByType(files []*ghttp.UploadFile, fType strin
 		typeKey = "sys.uploadFile.fileType"
 		sizeKey = "sys.uploadFile.fileSize"
 	}
-	//获取上传类型配置
+	// 获取上传类型配置
 	configType, err := up.getUpConfig(typeKey)
 	if err != nil {
 		return
 	}
-	//获取上传大小配置
+	// 获取上传大小配置
 	configSize, err := up.getUpConfig(sizeKey)
 	if err != nil {
 		return
 	}
 	for _, file := range files {
-		//检测文件类型
+		// 检测文件类型
 		rightType := up.checkFileType(file.Filename, configType.ConfigValue)
 		if !rightType {
 			err = gerror.New("上传文件类型错误，只能包含后缀为：" + configType.ConfigValue + "的文件。")
@@ -177,7 +177,7 @@ func (up UploadLocalAdapter) upBathByType(files []*ghttp.UploadFile, fType strin
 	return
 }
 
-//检查文件大小是否合法
+// 检查文件大小是否合法
 func (up UploadLocalAdapter) checkSize(configSize string, fileSize int64) (bool, error) {
 	match, err := gregex.MatchString(`^([0-9]+)(?i:([a-z]*))$`, configSize)
 	if err != nil {
@@ -203,7 +203,7 @@ func (up UploadLocalAdapter) checkSize(configSize string, fileSize int64) (bool,
 	return cfSize >= fileSize, nil
 }
 
-//获取上传配置
+// 获取上传配置
 func (up UploadLocalAdapter) getUpConfig(key string) (config *model.SysConfig, err error) {
 	config, err = service.SysConfig.GetConfigByKey(key)
 	if err != nil {
@@ -216,7 +216,7 @@ func (up UploadLocalAdapter) getUpConfig(key string) (config *model.SysConfig, e
 	return
 }
 
-//判断上传文件类型是否合法
+// 判断上传文件类型是否合法
 func (up UploadLocalAdapter) checkFileType(fileName, typeString string) bool {
 	suffix := gstr.SubStrRune(fileName, gstr.PosRRune(fileName, ".")+1, gstr.LenRune(fileName)-1)
 	imageType := gstr.Split(typeString, ",")

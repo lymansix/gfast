@@ -7,5 +7,5 @@
 
 package router
 
-//插件路由加载
+// 插件路由加载
 import _ "gfast/plugins/router"

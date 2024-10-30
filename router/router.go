@@ -11,11 +11,11 @@ import (
 
 func init() {
 	s := g.Server()
-	//跨域处理
+	// 跨域处理
 	s.Use(middleware.CORS)
 	s.Group("/", func(group *ghttp.RouterGroup) {
 
-		//上传的文件允许跨域请求
+		// 上传的文件允许跨域请求
 		group.Hook("/pub_upload/*", ghttp.HookBeforeServe, func(r *ghttp.Request) {
 			r.Response.CORSDefault()
 		})

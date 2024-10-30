@@ -10,7 +10,7 @@ type captcha struct{}
 
 var Captcha = new(captcha)
 
-//获取字母数字混合验证码
+// 获取字母数字混合验证码
 func (s *captcha) GetVerifyImgString() (idKeyC string, base64stringC string) {
 	driver := &base64Captcha.DriverString{
 		Height:          80,
@@ -31,7 +31,7 @@ func (s *captcha) GetVerifyImgString() (idKeyC string, base64stringC string) {
 	return
 }
 
-//验证输入的验证码是否正确
+// 验证输入的验证码是否正确
 func (s *captcha) VerifyString(id, answer string) bool {
 	driver := new(base64Captcha.DriverString)
 	store := base64Captcha.DefaultMemStore

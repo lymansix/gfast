@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	gtime.SetTimeZone("Asia/Shanghai") //设置系统时区
+	gtime.SetTimeZone("Asia/Shanghai") // 设置系统时区
 	showLogo()
 	g.Log().SetFlags(glog.F_ASYNC | glog.F_TIME_DATE | glog.F_TIME_TIME | glog.F_FILE_LONG)
 }

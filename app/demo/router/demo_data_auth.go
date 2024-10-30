@@ -15,17 +15,17 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-//加载路由
+// 加载路由
 func init() {
 	s := g.Server()
 	s.Group("/", func(group *ghttp.RouterGroup) {
 		group.Group("/demo", func(group *ghttp.RouterGroup) {
 			group.Group("/demoDataAuth", func(group *ghttp.RouterGroup) {
-				//gToken拦截器
+				// gToken拦截器
 				sysApi.GfToken.AuthMiddleware(group)
-				//context拦截器
+				// context拦截器
 				group.Middleware(middleware.Ctx, middleware.Auth)
-				//后台操作日志记录
+				// 后台操作日志记录
 				group.Hook("/*", ghttp.HookAfterOutput, sysApi.SysOperLog.OperationLog)
 				group.GET("list", api.DemoDataAuth.List)
 				group.GET("get", api.DemoDataAuth.Get)

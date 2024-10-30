@@ -30,10 +30,10 @@ var (
 
 // DemoDataAuthSearchReq 分页请求参数
 type DemoDataAuthSearchReq struct {
-	Id        string `p:"id" v:"id@integer#ID需为整数"`                                     //ID
-	Title     string `p:"title"`                                                        //标题
-	CreatedBy string `p:"createdBy" v:"createdBy@integer#创建人需为整数"`                      //创建人
-	CreatedAt string `p:"createdAt" v:"createdAt@datetime#创建时间需为YYYY-MM-DD hh:mm:ss格式"` //创建时间
+	Id        string `p:"id" v:"id@integer#ID需为整数"`                                     // ID
+	Title     string `p:"title"`                                                        // 标题
+	CreatedBy string `p:"createdBy" v:"createdBy@integer#创建人需为整数"`                      // 创建人
+	CreatedAt string `p:"createdAt" v:"createdAt@datetime#创建时间需为YYYY-MM-DD hh:mm:ss格式"` // 创建时间
 	comModel.PageReq
 }
 
